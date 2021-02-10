@@ -8,8 +8,12 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_subnet" "example" {
+  count = length(var.public_cidr)
   vpc_id = aws_vpc.main.id
-
-  availability_zone = var.availability_zone
-  cidr_block = cidrsubnet(aws_vpc.main.cidr_block, 8, 10)
+  availability_zone = ["us-east-1a", " us-east-1b", "us-east-1c", "us-east-1d"][count.index]
+  cidr_block = var.public_cidrs[count.index]
+  map_public_ip_on_launch = true
+  tags = {
+    "Name" = "main_public_${count.index + 1}"
+  }
 }

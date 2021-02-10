@@ -5,3 +5,7 @@ variable "cidr_block" {
 variable "availability_zone" {
   default = "us-east-1a"
 }
+
+variable "public_cidrs" {
+  type = list
+}
