@@ -21,6 +21,12 @@ resource "aws_subnet" "main_public" {
   }
 }
 
+resource "aws_route_table_association" "public_association" {
+  count = length(var.private_cidrs)
+  subnet_id = aws_subnet.main_public.*.id[count.index]
+  route_table_id = aws_route_table.main_public_rt.id
+}
+
 resource "aws_subnet" "main_private" {
   count = length(var.private_cidrs)
   vpc_id = aws_vpc.main.id
@@ -30,4 +36,34 @@ resource "aws_subnet" "main_private" {
   tags = {
     "Name" = "main_private_${data.aws_availability_zones.available.names[count.index]}"
   }
+}
+
+resource "aws_internet_gateway" "main_internet_gateway" {
+  vpc_id = aws_vpc.main.id
+  tags = {
+    "Name" = "main_igw"
+  } 
+}
+
+resource "aws_route_table" "main_public_rt" {
+  vpc_id = aws_vpc.main.id
+  tags ={
+    Name = "Main Public Route Table"
+  }
+}
+
+resource "aws_route" "default_route" {
+  route_table_id = aws_route_table.main_public_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.main_internet_gateway.id
+  
+}
+
+resource "aws_default_route_table" "main_default_rt" {
+  default_route_table_id = aws_vpc.main.default_route_table_id
+
+  tags = {
+    "Name" = "Default Route"
+  }
+  
 }
