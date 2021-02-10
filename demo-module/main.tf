@@ -8,7 +8,7 @@ resource "aws_vpc" "main" {
     Name = "Demo"
   }
   lifecycle {
-    creaate_before_destroy = true
+    create_before_destroy = true
   }
 }
 
