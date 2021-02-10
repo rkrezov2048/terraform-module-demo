@@ -7,9 +7,9 @@ variable "availability_zone" {
 }
 
 variable "public_cidrs" {
-  type = list
+  type = list(any)
 }
 
 variable "private_cidrs" {
-  type = list
+  type = list(any)
 }
