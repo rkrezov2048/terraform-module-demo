@@ -69,3 +69,24 @@ resource "aws_default_route_table" "main_default_rt" {
   }
 
 }
+
+resource "aws_security_group" "main_sg" {
+  name        = "public_sg"
+  description = "Security group for Public Access"
+  vpc_id      = aws_vpc.main.id
+  ingress = [{
+    cidr_blocks = [var.access_ip]
+    from_port   = 22
+    protocol    = "tcp"
+    to_port     = 22
+  }]
+  egress = [{
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 0
+    protocol    = "-1"
+    to_port     = 0
+  }]
+
+
+
+}

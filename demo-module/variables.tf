@@ -13,3 +13,7 @@ variable "public_cidrs" {
 variable "private_cidrs" {
   type = list(any)
 }
+
+variable "access_ip" {
+  type = string
+}
