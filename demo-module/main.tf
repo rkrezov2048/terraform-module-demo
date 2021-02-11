@@ -78,10 +78,10 @@ resource "aws_security_group" "main_sg" {
   dynamic "ingress" {
     for_each = each.value.ingress
     content {
-      cidr_blocks = ingres.value.cidr_blocks
-      from_port   = ingres.value.from
-      protocol    = ingres.value.protocol
-      to_port     = ingres.value.to
+      cidr_blocks = ingress.value.cidr_blocks
+      from_port   = ingress.value.from
+      protocol    = ingress.value.protocol
+      to_port     = ingress.value.to
     }
   }
   egress {
