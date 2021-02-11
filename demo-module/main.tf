@@ -90,7 +90,14 @@ resource "aws_security_group" "main_sg" {
     protocol    = "-1"
     to_port     = 0
   }
+}
 
-
+resource "aws_db_subnet_group" "main_rds_subg" {
+  count = var.db_subnet_group == true ? 1 : 0
+  name       = "mtc_rds_subnetgroup"
+  subnet_ids = aws_subnet.main_private.*.id
+  tags = {
+    Name = "Main RDS subnet group"
+  }
 
 }
