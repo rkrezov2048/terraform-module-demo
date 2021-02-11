@@ -9,3 +9,11 @@ output "public_sub" {
 output "private_sub" {
   value = aws_subnet.main_private.*.id
 }
+
+output "db_subnet_group" {
+  value = aws_db_subnet_group.main_rds_subg.*.name
+}
+
+output "db_sg" {
+  value = [aws_security_group.main_sg["rds".id]]
+}
