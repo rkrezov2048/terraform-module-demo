@@ -71,14 +71,18 @@ resource "aws_default_route_table" "main_default_rt" {
 }
 
 resource "aws_security_group" "main_sg" {
-  name        = "public_sg"
-  description = "Security group for Public Access"
+  for_each    = var.security_groups
+  name        = each.value.name
+  description = each.value.description
   vpc_id      = aws_vpc.main.id
-  ingress  {
-    cidr_blocks = [var.access_ip]
-    from_port   = 22
-    protocol    = "tcp"
-    to_port     = 22
+  dynamic "ingress" {
+    for_each = each.value.ingress
+    content {
+      cidr_blocks = ingres.value.cidr_blocks
+      from_port   = ingres.value.from
+      protocol    = ingres.value.protocol
+      to_port     = ingres.value.to
+    }
   }
   egress {
     cidr_blocks = ["0.0.0.0/0"]
