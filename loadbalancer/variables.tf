@@ -12,3 +12,5 @@ variable "lb_healthy_threshold" {}
 variable "lb_unhealthy_threshold" {}
 variable "lb_timeout" {}
 variable "interval" {}
+variable "listener_port" {}
+variable "listener_protocol" {}

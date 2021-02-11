@@ -9,7 +9,7 @@ resource "aws_lb" "main_lb" {
 }
 
 
-resource "aws_lb_target_group" "main-tf" {
+resource "aws_lb_target_group" "main_tf" {
   name     = "main-lb-tg-${substr(uuid(), 0, 4)}"
   port     = var.tg_port     #80
   protocol = var.tg_protocol #HTTP
@@ -20,5 +20,16 @@ resource "aws_lb_target_group" "main-tf" {
     unhealthy_threshold = var.lb_unhealthy_threshold
     timeout             = var.lb_timeout
     interval            = var.interval
+  }
+}
+
+
+resource "aws_lb_listener" "main_lb_listener" {
+  load_balancer_arn = aws_lb.main_lb.arn
+  port = var.listener_port #80
+  protocol = var.listener_protocol #HTTP
+  default_action {
+    type = "forward"
+    target_group_arn = aws_lb_target_group.main_tf.arn
   }
 }
