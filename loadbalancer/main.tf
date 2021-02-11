@@ -26,10 +26,10 @@ resource "aws_lb_target_group" "main_tf" {
 
 resource "aws_lb_listener" "main_lb_listener" {
   load_balancer_arn = aws_lb.main_lb.arn
-  port = var.listener_port #80
-  protocol = var.listener_protocol #HTTP
+  port              = var.listener_port     #80
+  protocol          = var.listener_protocol #HTTP
   default_action {
-    type = "forward"
+    type             = "forward"
     target_group_arn = aws_lb_target_group.main_tf.arn
   }
 }
