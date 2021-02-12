@@ -4,9 +4,12 @@ data "aws_availability_zones" "available" {}
 resource "aws_vpc" "main" {
   cidr_block = var.cidr_block
 
-  tags = {
-    Name = "Demo"
-  }
+  tags = merge(
+    var.additional_tags,
+    {
+      Name = "Demo-vpc"
+    },
+  )
   lifecycle {
     create_before_destroy = true
   }
@@ -93,7 +96,7 @@ resource "aws_security_group" "main_sg" {
 }
 
 resource "aws_db_subnet_group" "main_rds_subg" {
-  count = var.db_subnet_group == true ? 1 : 0
+  count      = var.db_subnet_group == true ? 1 : 0
   name       = "mtc_rds_subnetgroup"
   subnet_ids = aws_subnet.main_private.*.id
   tags = {
