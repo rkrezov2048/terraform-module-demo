@@ -14,6 +14,9 @@ resource "aws_lb_target_group" "main_tf" {
   port     = var.tg_port     #80
   protocol = var.tg_protocol #HTTP
   vpc_id   = var.vpc_id
+  lifecycle {
+    ignore_changes = [name]
+  }
   #   make this dynamic for multiple target groups
   health_check {
     healthy_threshold   = var.lb_healthy_threshold
