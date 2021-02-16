@@ -13,6 +13,9 @@ data "aws_ami" "server_ami" {
 resource "random_id" "main_node_id" {
   byte_length = 2
   count       = var.instance_count
+  keepers = {
+    key_name = var.key_name
+  }
 }
 
 resource "aws_key_pair" "terra_demo" {
