@@ -15,12 +15,17 @@ resource "random_id" "main_node_id" {
   count       = var.instance_count
 }
 
+resource "aws_key_pair" "terra_demo" {
+  key_name   = var.key_name
+  public_key = file(var.public_key_path)
+}
+
 resource "aws_instance" "main_node" {
   count                  = var.instance_count
   instance_type          = var.instance_type
   ami                    = data.aws_ami.server_ami.id
   vpc_security_group_ids = var.public_sg
-#   key_name = "value"
+  key_name               = aws_key_pair.terra_demo.id
   subnet_id              = var.public_sub[count.index]
 #   user_data              = "value"
   root_block_device {
