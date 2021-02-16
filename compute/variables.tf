@@ -12,7 +12,7 @@ variable "public_sg" {
   
 }
 
-variable "subnet_id" {
+variable "public_sub" {
   
 }
 
