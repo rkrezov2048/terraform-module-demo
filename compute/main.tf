@@ -30,7 +30,16 @@ resource "aws_instance" "main_node" {
   vpc_security_group_ids = var.public_sg
   key_name               = aws_key_pair.terra_demo.id
   subnet_id              = var.public_sub[count.index]
-#   user_data              = "value"
+  user_data = templatefile(var.used_data_path,
+    {
+      nodename    = "main-node-${random_id.main_node_id[count.index].dec}"
+      db_endpoint = var.db_endpoint
+      dbuser      = var.dbuser
+      dbpass      = var.dbpass
+      dbname      = var.dbname
+
+    }
+  )
   root_block_device {
     volume_size = var.vol_size
   }

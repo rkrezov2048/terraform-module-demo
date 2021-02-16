@@ -14,3 +14,7 @@ variable "vol_size" {}
 variable "additional_tags" {}
 variable "key_name" {}
 variable "public_key_path" {}
+variable "dbuser" {}
+variable "db_endpoint" {}
+variable "dbpass" {}
+variable "dbname" {}
