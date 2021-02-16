@@ -19,7 +19,7 @@ resource "aws_instance" "main_node" {
   count                  = var.instance_count
   instance_type          = var.instance_type
   ami                    = data.aws_ami.server_ami.id
-  vpc_security_group_ids = [var.public_sg]
+  vpc_security_group_ids = var.public_sg
 #   key_name = "value"
   subnet_id              = var.public_sub[count.index]
 #   user_data              = "value"
