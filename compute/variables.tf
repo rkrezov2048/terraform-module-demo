@@ -19,3 +19,7 @@ variable "subnet_id" {
 variable "vol_size" {
   
 }
+
+variable "additional_tags" {
+  
+}
