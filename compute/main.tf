@@ -51,3 +51,10 @@ resource "aws_instance" "main_node" {
   )
 }
 
+resource "aws_lb_target_group_attachment" "main-tf-attach" {
+  count            = var.instance_count
+  target_group_arn = var.target_group_arn
+  target_id        = aws_instance.main_node[count.index].id
+  port             = 8000
+
+}
