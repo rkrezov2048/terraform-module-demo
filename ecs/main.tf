@@ -52,7 +52,7 @@ resource "aws_autoscaling_group" "ecs_auto" {
     var.additional_tags,
     {
       Name = "ECS-Dev-Demo-Cluster"
-    }
+    },
   )
 
 }
