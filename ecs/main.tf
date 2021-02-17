@@ -50,7 +50,8 @@ resource "aws_autoscaling_group" "ecs_auto" {
 
   tags = [
     {
-      Name              = "ECS-Demo-Cluster"
+      key              = "Name"
+      value            = "Ecs-Cluster-Demo"
       propage_at_launch = true
 
     }
