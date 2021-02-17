@@ -21,13 +21,17 @@ data "aws_ami" "amazon_ecs" {
 
 
 resource "aws_launch_configuration" "ecs_lc" {
-  name                        = ""
+  name                        = "ecs-launch-config"
   image_id                    = data.aws_ami.amazon_ecs.id
   instance_type               = var.lc_instance_type
   iam_instance_profile        = var.lc_iam_instance_profile
   security_groups             = var.lc_security_groups
   associate_public_ip_address = var.lc_associate_public_ip_address
-  user_data                   = var.lc_user_data
+  user_data = templatefile(var.user_data_path,
+    {
+      cluster_name = var.cluster_name
+    }
+  )
   lifecycle {
     create_before_destroy = true
   }
@@ -59,9 +63,9 @@ resource "aws_autoscaling_group" "ecs_auto" {
 # }
 
 resource "aws_ecs_cluster" "dev-ecs1" {
-  name = "dev-ecs-cluster"
+  name = var.cluster_name
   tags = {
-    Name = "Demo-Cluster"
+    Name = "ecs-dev-demo"
   }
 }
 
