@@ -48,11 +48,13 @@ resource "aws_autoscaling_group" "ecs_auto" {
     create_before_destroy = true
   }
 
-tags = [ 
+  tags = [
     {
-        "Name" = "ECS-Demo-Cluster"
-    } 
-]
+      Name              = "ECS-Demo-Cluster"
+      propage_at_launch = true
+
+    }
+  ]
 
 
 }
