@@ -48,6 +48,7 @@ resource "aws_autoscaling_group" "ecs_auto" {
     create_before_destroy = true
   }
 
+#  need to interpolate this tagging to autoscaling groups
   tags = [
     {
       key              = "Name"
@@ -59,17 +60,6 @@ resource "aws_autoscaling_group" "ecs_auto" {
 
 
 }
-# resource "aws_ecs_capacity_provider" "ecs_capacity" {
-#   name = "capacity-provider-dev"
-#   auto_scaling_group_provider {
-#     auto_scaling_group_arn = aws_autoscaling_group.ecs_auto.arn
-#     managed_termination_protection = "DISABLED"
-
-#     managed_scaling {
-#       status = "DISABLED"
-#     }
-#   }
-# }
 
 resource "aws_ecs_cluster" "dev-ecs1" {
   name = var.cluster_name
@@ -81,5 +71,3 @@ resource "aws_ecs_cluster" "dev-ecs1" {
 # -- ecs-task definition
 
 # --- ecs-service
-
-# -- ecs-cluster
