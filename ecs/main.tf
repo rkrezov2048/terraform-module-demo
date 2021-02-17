@@ -48,8 +48,14 @@ resource "aws_autoscaling_group" "ecs_auto" {
     create_before_destroy = true
   }
 
-}
+  tags = merge(
+    var.additional_tags,
+    {
+      Name = ECS-Dev-Demo-Cluster
+    }
+  )
 
+}
 # resource "aws_ecs_capacity_provider" "ecs_capacity" {
 #   name = "capacity-provider-dev"
 #   auto_scaling_group_provider {
@@ -73,4 +79,4 @@ resource "aws_ecs_cluster" "dev-ecs1" {
 
 # --- ecs-service
 
-# -- ecs-cluster group
+# -- ecs-cluster

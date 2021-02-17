@@ -10,3 +10,5 @@ variable "asg_desired_capacity" {}
 variable "asg_vpc_zone_identifier" {}
 variable "user_data_path" {}
 variable "cluster_name" {}
+
+variable "additional_tags" {}
