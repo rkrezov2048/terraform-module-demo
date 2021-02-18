@@ -16,9 +16,9 @@ output "db_subnet_group" {
 
 # issue with hard codeded values for the output of the security group
 
-# output "db_sg" {
-#   value = [aws_security_group.main_sg["rds"].id]
-# }
+output "alb_sg" {
+  value = [aws_security_group.main_sg["alb_ecs"].id]
+}
 
 output "public_sg" {
   value = [aws_security_group.main_sg["public"].id]
