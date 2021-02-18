@@ -11,3 +11,4 @@ variable "asg_vpc_zone_identifier" {}
 variable "user_data_path" {}
 variable "cluster_name" {}
 variable "asg_tags" {}
+variable "asg_target_group_arns" {}

@@ -24,6 +24,9 @@ resource "aws_autoscaling_group" "ecs_auto" {
   max_size             = var.asg_max_size
   desired_capacity     = var.asg_desired_capacity
   vpc_zone_identifier  = var.asg_vpc_zone_identifier
+  target_group_arns    = var.asg_target_group_arns
+  health_check_type = "ELB"
+  health_check_grace_period = 300
   lifecycle {
     create_before_destroy = true
     ignore_changes = [tags]
