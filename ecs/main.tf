@@ -47,18 +47,16 @@ resource "aws_autoscaling_group" "ecs_auto" {
   lifecycle {
     create_before_destroy = true
   }
+  tags = var.asg_tags
+  #  need to interpolate this tagging to autoscaling groups
+  # tags = [
+  #   {
+  #     key              = "Name"
+  #     value            = "Ecs-Cluster-Demo"
+  #     propage_at_launch = true
 
-#  need to interpolate this tagging to autoscaling groups
-  tags = [
-    {
-      key              = "Name"
-      value            = "Ecs-Cluster-Demo"
-      propage_at_launch = true
-
-    }
-  ]
-
-
+  #   }
+  # ]
 }
 
 resource "aws_ecs_cluster" "dev-ecs1" {

@@ -14,6 +14,8 @@ output "db_subnet_group" {
   value = aws_db_subnet_group.main_rds_subg.*.name
 }
 
+# issue with hard codeded values for the output of the security group
+
 # output "db_sg" {
 #   value = [aws_security_group.main_sg["rds"].id]
 # }
