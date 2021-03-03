@@ -5,3 +5,11 @@ output "target_group_arn" {
 output "endpoint" {
   value = aws_lb.main_lb.dns_name
 }
+
+output "alb_id" {
+  value = aws_lb.main_lb.id
+}
+
+output "alb_arn" {
+  value = aws_lb.main_lb.arn
+}
