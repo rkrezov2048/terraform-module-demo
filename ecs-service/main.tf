@@ -3,9 +3,23 @@
 # alb-listener rule
 # alb-target-group we need to see if we need this
 
+data "template_file" "task_definition" {
+  template = file(var.task_path)
+
+  vars = {
+    task_definition_name = var.task_definition_name
+    image_url            = var.image_url
+    cpu                  = var.cpu
+    memory               = var.memory
+    containerPort        = var.containerPort
+    ecs_service_name     = var.ecs_service_name
+    logs_region          = var.logs_region
+  }
+}
+
 resource "aws_ecs_task_definition" "demo_task" {
   family                = var.ecs_task_family
-  container_definitions = "value"
+  container_definitions = data.template_file.task_definition.rendered
   network_mode          = var.ecs_task_network_mode
   tags                  = var.tags
 }
@@ -33,5 +47,5 @@ resource "aws_ecs_service" "demo-service" {
 
 resource "aws_cloudwatch_log_group" "demo-sevice-log-group" {
   name = "${var.ecs_service_name}-LogGroup"
-  
+
 }
