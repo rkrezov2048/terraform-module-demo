@@ -4,7 +4,7 @@
 # alb-target-group we need to see if we need this
 
 data "template_file" "task_definition" {
-  template = file(var.task_path)
+  template = file(format(var.task_path))
 
   vars = {
     task_definition_name = var.task_definition_name
