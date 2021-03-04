@@ -15,3 +15,4 @@ variable "cpu" {}
 variable "memory" {}
 variable "containerPort" {}
 variable "logs_region" {}
+variable "tags" {}
