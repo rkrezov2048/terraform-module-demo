@@ -14,22 +14,23 @@ resource "aws_launch_configuration" "ecs_lc" {
   )
   lifecycle {
     create_before_destroy = true
+    ignore_changes        = [image_id]
   }
 }
 
 resource "aws_autoscaling_group" "ecs_auto" {
-  name                 = "dev-ecs-asg"
-  launch_configuration = aws_launch_configuration.ecs_lc.name
-  min_size             = var.asg_min_size
-  max_size             = var.asg_max_size
-  desired_capacity     = var.asg_desired_capacity
-  vpc_zone_identifier  = var.asg_vpc_zone_identifier
-  target_group_arns    = var.asg_target_group_arns
-  health_check_type = "ELB"
+  name                      = "dev-ecs-asg"
+  launch_configuration      = aws_launch_configuration.ecs_lc.name
+  min_size                  = var.asg_min_size
+  max_size                  = var.asg_max_size
+  desired_capacity          = var.asg_desired_capacity
+  vpc_zone_identifier       = var.asg_vpc_zone_identifier
+  target_group_arns         = var.asg_target_group_arns
+  health_check_type         = "ELB"
   health_check_grace_period = 300
   lifecycle {
     create_before_destroy = true
-    ignore_changes = [tags]
+    ignore_changes        = [tags]
   }
   tags = var.asg_tags
 }
@@ -40,7 +41,3 @@ resource "aws_ecs_cluster" "dev-ecs1" {
     Name = "ecs-dev-demo"
   }
 }
-
-# -- ecs-task definition
-
-# --- ecs-service
