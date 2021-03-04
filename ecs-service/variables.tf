@@ -8,6 +8,7 @@ variable "ecs_service_launch_type" {}
 variable "ecs_service_cluster" {}
 variable "ecs_service_port" {}
 variable "aws_lb_target_group" {}
+variable "task_path" {}
 variable "task_definition_name" {}
 variable "image_url" {}
 variable "cpu" {}
