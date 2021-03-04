@@ -7,7 +7,7 @@ data "template_file" "task_definition" {
   template = file(format(var.task_path))
 
   vars = {
-    task_definition_name = var.task_definition_name
+    # task_definition_name = var.task_definition_name
     image_url            = var.image_url
     cpu                  = var.cpu
     memory               = var.memory
