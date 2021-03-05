@@ -6,6 +6,7 @@ variable "ecs_service_name" {}
 variable "ecs_service_desired_count" {}
 variable "ecs_service_launch_type" {}
 variable "ecs_service_cluster" {}
+variable "ecs_iam_role" {}
 variable "ecs_service_port" {}
 variable "aws_lb_target_group" {}
 variable "task_path" {}

@@ -25,9 +25,10 @@ resource "aws_ecs_task_definition" "demo_task" {
 }
 
 resource "aws_ecs_service" "demo-service" {
-  name            = var.ecs_service_name
+  name            = "${var.ecs_service_name}-service"
   cluster         = var.ecs_service_cluster
   task_definition = aws_ecs_task_definition.demo_task.arn
+  iam_role        = var.ecs_iam_role
   desired_count   = var.ecs_service_desired_count
   launch_type     = var.ecs_service_launch_type
 
