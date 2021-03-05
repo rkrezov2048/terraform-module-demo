@@ -11,7 +11,7 @@ variable "vpc_id" {}
 variable "tg_path" {}
 variable "tg_healthy_threshold" {}
 variable "tg_unhealthy_threshold" {}
-variable "tg_timeoutt" {}
+variable "tg_timeout" {}
 variable "tg_interval" {}
 variable "tg_matcher" {}
 variable "listener_port" {}
