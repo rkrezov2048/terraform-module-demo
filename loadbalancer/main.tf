@@ -18,12 +18,14 @@ resource "aws_lb_target_group" "main_tf" {
     ignore_changes = [name]
     create_before_destroy = true
   }
-  #   make this dynamic for multiple target groups
+
   health_check {
-    healthy_threshold   = var.lb_healthy_threshold
-    unhealthy_threshold = var.lb_unhealthy_threshold
-    timeout             = var.lb_timeout
-    interval            = var.interval
+    path                = var.tg_path
+    healthy_threshold   = var.tg_healthy_threshold
+    unhealthy_threshold = var.tg_unhealthy_threshold
+    timeout             = var.tg_timeout
+    interval            = var.tg_interval
+    matcher             = var.tg_matcher
   }
 }
 
