@@ -35,3 +35,7 @@ output "sg" {
 output "sg_name" {
   value = values(aws_security_group.main_sg)[*].name
 }
+
+output "sg_name_and_id" {
+  value = zipmap(values(aws_security_group.main_sg)[*].name, values(aws_security_group.main_sg)[*].id)
+}
