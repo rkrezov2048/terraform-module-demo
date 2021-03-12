@@ -27,3 +27,7 @@ output "public_sg" {
 output "db_sg" {
   value = [aws_security_group.main_sg["rds"].id]
 }
+
+output "sg" {
+  value = [aws_security_group.main_sg[*].id]
+}
