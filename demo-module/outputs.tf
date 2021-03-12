@@ -29,5 +29,5 @@ output "db_sg" {
 }
 
 output "sg" {
-  value = aws_security_group.main_sg.*.id
+  value = values(aws_security_group.main_sg)[*].id
 }
