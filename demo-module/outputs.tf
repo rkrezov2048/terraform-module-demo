@@ -31,3 +31,7 @@ output "db_sg" {
 output "sg" {
   value = values(aws_security_group.main_sg)[*].id
 }
+
+output "sg_name" {
+  value = values(aws_security_group.main_sg)[*].name
+}
